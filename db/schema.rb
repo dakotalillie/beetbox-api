@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180110152800) do
+ActiveRecord::Schema.define(version: 20180112222042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,10 @@ ActiveRecord::Schema.define(version: 20180110152800) do
     t.uuid "library_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "fullres_file_file_name"
+    t.string "fullres_file_content_type"
+    t.integer "fullres_file_file_size"
+    t.datetime "fullres_file_updated_at"
     t.index ["library_id"], name: "index_samples_on_library_id"
     t.index ["user_id"], name: "index_samples_on_user_id"
   end

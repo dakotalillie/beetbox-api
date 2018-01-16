@@ -9,7 +9,8 @@
 AWS_URL = 'aws.s3.com/'
 
 # USERS
-3.times do
+User.create(username: "Dakota", password: "password", first_name: "Dakota", last_name: "Lillie", email: "bewguy101@gmail.com")
+2.times do
   user = User.new(
     username: Faker::Internet.user_name,
     password: "password",
@@ -21,10 +22,10 @@ AWS_URL = 'aws.s3.com/'
 end
 
 # LIBRARIES
-10.times do
+15.times do
   instrument = Faker::Music.instrument
   library = Library.new(
-    name: "#{instrument} samples v. #{Faker::Number.between(1, 5)}",
+    name: "#{instrument} samples v.#{Faker::Number.between(1, 5)}",
     artwork_url: "#{Faker::Internet.url("#{AWS_URL}#{instrument}", '.jpg')}"
   )
   user = User.order("RANDOM()").first
@@ -33,7 +34,7 @@ end
 end
 
 # SAMPLES
-50.times do
+500.times do
   instrument = Faker::Music.instrument
   number = Faker::Number.between(1, 99)
   types = ["loop", "one-shot"]
@@ -60,7 +61,7 @@ end
   tag = Tag.new(
     name: Faker::Color.color_name
   )
-  10.times do
+  30.times do
     sample = Sample.order("RANDOM()").first
     sample.tags.push(tag)
   end

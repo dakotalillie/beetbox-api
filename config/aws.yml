@@ -1,0 +1,13 @@
+defaults: &defaults
+  access_key_id: "AKIAIZEWSTCETE3VHFZQ"
+  secret_access_key: "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"
+development:
+  <<: *defaults
+  bucket: "beetbox-dev"
+test:
+  <<: *defaults
+  bucket: "beetbox-test"
+production:
+  access_key_id: <%=ENV["AWS_ACCESS_KEY_ID"]%>
+  secret_access_key: <%=ENV["AWS_SECRET_ACCESS_KEY"]%>
+  bucket: "beetbox"

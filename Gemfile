@@ -25,8 +25,14 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
-
 gem 'active_model_serializers', '~> 0.10.0'
+gem 'jwt'
+gem 'figaro'
+gem 'paperclip', '~> 5.1.0'
+gem 'aws-sdk', '< 3.0'
+gem 's3_direct_upload' # direct upload form helper and assets
+gem 'paperclip-wav-mp3', '~> 0.1'
+gem 'rubyzip'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
