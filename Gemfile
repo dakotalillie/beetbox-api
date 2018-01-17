@@ -33,6 +33,7 @@ gem 'aws-sdk', '< 3.0'
 gem 's3_direct_upload' # direct upload form helper and assets
 gem 'paperclip-wav-mp3', '~> 0.1'
 gem 'rubyzip'
+gem 'waveinfo'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

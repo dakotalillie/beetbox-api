@@ -6,6 +6,7 @@ class CreateSamples < ActiveRecord::Migration[5.1]
       t.string :preview_url
       t.string :instrument
       t.string :sample_type
+      t.float :length
       t.integer :tempo
       t.string :key
       t.string :genre

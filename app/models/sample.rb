@@ -10,7 +10,7 @@ class Sample < ApplicationRecord
                     :path => ':user_id/:style/:filename',
                     :storage => :s3,
                     :s3_credentials => Proc.new{|a| a.instance.s3_credentials },
-                    :s3_region => 'us-east-2'
+                    :s3_region => 'us-east-1'
   validates_attachment_file_name :fullres_file, :matches => [/wav\Z/, /mpe?g\Z/]
   do_not_validate_attachment_file_type :fullres_file
 
@@ -19,6 +19,6 @@ class Sample < ApplicationRecord
   end
   
   def s3_credentials
-    {:bucket => "beetbox-dev", :access_key_id => ENV['aws_access_key'], :secret_access_key => ENV['aws_secret_access_key']}
+    {:bucket => "beetbox-data", :access_key_id => ENV['aws_access_key'], :secret_access_key => ENV['aws_secret_access_key']}
   end
 end

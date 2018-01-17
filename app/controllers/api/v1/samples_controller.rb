@@ -14,10 +14,13 @@ class Api::V1::SamplesController < ApplicationController
 
     params[:sample][:fullres_file].each do |key, sample_data|
       @sample = current_user.samples.new()
+      wave = WaveInfo.new(sample_data.path)
+
       @sample.fullres_file = sample_data
       @sample.name = sample_data.original_filename
-      @sample.url = "https://beetbox-dev.s3.us-east-2.amazonaws.com/#{current_user.id}/original/#{@sample.name.gsub(/\s/, '_')}"
-      @sample.preview_url = "https://beetbox-dev.s3.us-east-2.amazonaws.com/#{current_user.id}/mp3/#{@sample.name.gsub(/\s/, '_')}"
+      @sample.url = "https://beetbox-data.s3.us-east-1.amazonaws.com/#{current_user.id}/original/#{@sample.name.gsub(/\s/, '_')}"
+      @sample.length = wave.duration
+      @sample.preview_url = "https://beetbox-data.s3.us-east-1.amazonaws.com/#{current_user.id}/mp3/#{@sample.name.gsub(/\s/, '_')}"
       if @sample.save
         @samples.push(@sample)
       else
