@@ -54,9 +54,11 @@ ActiveRecord::Schema.define(version: 20180119181214) do
     t.string "instrument"
     t.string "sample_type"
     t.float "length"
-    t.integer "tempo"
+    t.float "tempo"
     t.string "key"
     t.string "genre"
+    t.integer "rating"
+    t.boolean "favorite"
     t.uuid "user_id"
     t.uuid "library_id"
     t.datetime "created_at", null: false
@@ -76,8 +78,10 @@ ActiveRecord::Schema.define(version: 20180119181214) do
 
   create_table "tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
+    t.uuid "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tags_on_user_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -93,4 +97,5 @@ ActiveRecord::Schema.define(version: 20180119181214) do
   add_foreign_key "libraries", "users"
   add_foreign_key "samples", "libraries"
   add_foreign_key "samples", "users"
+  add_foreign_key "tags", "users"
 end

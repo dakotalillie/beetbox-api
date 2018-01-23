@@ -5,12 +5,14 @@ Rails.application.routes.draw do
       resources :samples, only: [:create]
       resources :libraries, only: [:create, :update, :destroy]
       resources :folders, only: [:create, :update, :destroy]
+      resources :tags, only: [:create, :update, :destroy]
       # auth
       post '/login', to: 'sessions#create'
       post '/signup', to: 'users#create'
       get '/current_user', to: 'sessions#show'
       # uniq actions
       put '/samples/download', to: 'samples#download'
+      patch '/samples', to: 'samples#update'
       delete '/samples', to: 'samples#destroy'
       mount ActionCable.server => '/cable'
     end

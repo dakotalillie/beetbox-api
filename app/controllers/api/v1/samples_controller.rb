@@ -35,7 +35,38 @@ class Api::V1::SamplesController < ApplicationController
   end
   
   def update
-    byebug
+    @edited_samples = []
+    params[:samples].each do |sampleId|
+      sample = Sample.find(sampleId)
+      sample.favorite = params[:data][:favorite] if !params[:data][:favorite].nil?
+      sample.sample_type = params[:data][:sample_type] if !params[:data][:sample_type].nil?
+      sample.tempo = params[:data][:tempo] if !params[:data][:tempo].nil?
+      sample.rating = params[:data][:rating] if !params[:data][:rating].nil?
+      sample.instrument = params[:data][:instrument] if !params[:data][:instrument].nil?
+      sample.genre = params[:data][:genre] if !params[:data][:genre].nil?
+      sample.key = params[:data][:key] if !params[:data][:key].nil?
+      sample.library = Library.find(params[:data][:library_id]) if !params[:data][:library_id].nil?
+      if params[:data][:folders]
+        folder = Folder.find(params[:data][:folders])
+        if params[:data][:action] === 'add'
+          sample.folders << folder if !sample.folders.include?(folder)
+        elsif params[:data][:action] === 'remove'
+          sample.folders.delete(folder) if sample.folders.include?(folder)
+        end
+      end
+      if params[:data][:tags]
+        tag = Tag.find(params[:data][:tags])
+        if params[:data][:action] === 'add'
+          sample.tags << tag if !sample.tags.include?(tag)
+        elsif params[:data][:action] ==='remove'
+          sample.tags.delete(tag) if sample.tags.include?(tag)
+        end
+      end
+      if sample.save
+        @edited_samples << sample
+      end
+    end
+    render json: @edited_samples, status: :ok
   end
   
   def destroy
