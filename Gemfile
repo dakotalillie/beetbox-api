@@ -31,7 +31,7 @@ gem 'figaro'
 gem 'paperclip', '~> 5.1.0'
 gem 'aws-sdk', '< 3.0'
 gem 's3_direct_upload' # direct upload form helper and assets
-gem 'paperclip-wav-mp3', '~> 0.1'
+gem 'paperclip-wav-mp3'
 gem 'rubyzip'
 gem 'waveinfo'
 
