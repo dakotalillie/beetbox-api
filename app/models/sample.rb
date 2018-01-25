@@ -11,7 +11,7 @@ class Sample < ApplicationRecord
                     :storage => :s3,
                     :s3_credentials => Proc.new{|a| a.instance.s3_credentials },
                     :s3_region => 'us-east-1'
-  validates_attachment_file_name :fullres_file, :matches => [/wav\Z/, /mpe?g\Z/]
+  validates_attachment_file_name :fullres_file, :matches => [/wav\Z/, /Wav\Z/,/mpe?g\Z/]
   do_not_validate_attachment_file_type :fullres_file
 
   Paperclip.interpolates :user_id do |attachment, style|

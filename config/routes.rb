@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       put '/samples/download', to: 'samples#download'
       patch '/samples', to: 'samples#update'
       delete '/samples', to: 'samples#destroy'
+      get '/search/users/exact/:query', to: 'users#exact_search'
       mount ActionCable.server => '/cable'
     end
   end

@@ -14,7 +14,7 @@ class Api::V1::SessionsController < ApplicationController
       # }
       render json: user
     else
-      render({json: {error: 'User is invalid'}, status: 401})
+      render({json: {error: "Whoops! Ya 'don goofed."}, status: 401})
     end
   end
 

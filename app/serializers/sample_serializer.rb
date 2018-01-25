@@ -5,7 +5,15 @@ class SampleSerializer < ActiveModel::Serializer
     object.folders.map {|folder| folder.id}
   end
 
+  # def folders
+  #   []
+  # end
+
   def tags
     object.tags.map {|tag| tag.id}
   end
+
+  # def tags
+  #   []
+  # end
 end

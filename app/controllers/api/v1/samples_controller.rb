@@ -17,9 +17,16 @@ class Api::V1::SamplesController < ApplicationController
       wave = WaveInfo.new(sample_data.path)
       @sample.fullres_file = sample_data
       @sample.name = sample_data.original_filename
-      @sample.url = "https://beetbox-data.s3.us-east-1.amazonaws.com/#{current_user.id}/original/#{@sample.name.gsub(/\s/, '_')}"
+      @sample.url = "https://beetbox-data.s3.us-east-1.amazonaws.com/#{current_user.id}/original/#{@sample.name.gsub(/[\s#&]/, '_')}"
       @sample.length = wave.duration
-      @sample.preview_url = "https://beetbox-data.s3.us-east-1.amazonaws.com/#{current_user.id}/mp3/#{@sample.name.gsub(/\s/, '_')}"
+      @sample.preview_url = "https://beetbox-data.s3.us-east-1.amazonaws.com/#{current_user.id}/mp3/#{@sample.name.gsub(/[\s#&]/, '_')}"
+      if !params[:sample][:folders].nil?
+        folders = params[:sample][:folders].split(',')
+        folders.each do |folderId|
+          folder = Folder.find(folderId)
+          @sample.folders << folder
+        end
+      end
       if @sample.save
         serialized_data = ActiveModelSerializers::Adapter::Json.new(
           SampleSerializer.new(@sample)
@@ -41,10 +48,14 @@ class Api::V1::SamplesController < ApplicationController
       sample.favorite = params[:data][:favorite] if !params[:data][:favorite].nil?
       sample.sample_type = params[:data][:sample_type] if !params[:data][:sample_type].nil?
       sample.tempo = params[:data][:tempo] if !params[:data][:tempo].nil?
+      sample.tempo = nil if params[:data][:remove_tempo]
       sample.rating = params[:data][:rating] if !params[:data][:rating].nil?
       sample.instrument = params[:data][:instrument] if !params[:data][:instrument].nil?
+      sample.instrument = nil if params[:data][:remove_instrument]
       sample.genre = params[:data][:genre] if !params[:data][:genre].nil?
+      sample.genre = nil if params[:data][:remove_genre]
       sample.key = params[:data][:key] if !params[:data][:key].nil?
+      sample.key = nil if params[:data][:remove_key]
       sample.library = Library.find(params[:data][:library_id]) if !params[:data][:library_id].nil?
       if params[:data][:folders]
         folder = Folder.find(params[:data][:folders])
@@ -70,11 +81,13 @@ class Api::V1::SamplesController < ApplicationController
   end
   
   def destroy
+    samples = []
     params[:sampleIds].each do |id|
       sample = Sample.find(id)
+      samples << sample
       sample.delete
     end
-    render json: params[:sampleIds]
+    render json: samples
   end
 
   def download

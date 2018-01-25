@@ -9,7 +9,7 @@
 AWS_URL = 'aws.s3.com/'
 
 # USERS
-User.create(username: "Dakota", password: "password", first_name: "Dakota", last_name: "Lillie", email: "bewguy101@gmail.com")
+User.create(username: "dakota", password: "password", first_name: "Dakota", last_name: "Lillie", email: "bewguy101@gmail.com")
 # 2.times do
 #   user = User.new(
 #     username: Faker::Internet.user_name,

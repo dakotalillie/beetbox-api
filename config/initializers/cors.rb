@@ -14,3 +14,5 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
       methods: [:get, :post, :put, :patch, :delete, :options, :head]
   end
 end
+
+Rails.application.config.action_cable.disable_request_forgery_protection = true
