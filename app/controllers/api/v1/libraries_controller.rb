@@ -2,6 +2,7 @@ class Api::V1::LibrariesController < ApplicationController
   before_action :set_library, only: [:update, :destroy]
 
   def create
+    byebug
     @library = current_user.libraries.new()
     @library.name = library_params[:name]
     if library_params[:file]

@@ -6,5 +6,5 @@ test:
 
 production:
   adapter: redis
-  url: redis://redistogo:bb21a9a4756b4692e37849619f87c643@soldierfish.redistogo.com:10633/
+  url: redis://redistogo:1106779b2d67233f2c44de569098b47f@soldierfish.redistogo.com:10633/
   channel_prefix: beetbox-api_production
