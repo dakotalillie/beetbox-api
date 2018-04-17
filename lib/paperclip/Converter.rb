@@ -24,6 +24,7 @@ module Paperclip
         raise Error, "There was an error converting #{@basename} to mp3"
       end
 
+      
       output
     end
   end
