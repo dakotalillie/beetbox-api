@@ -6,7 +6,7 @@ class Sample < ApplicationRecord
 
   has_attached_file :fullres_file,
                     styles: { mp3: {} },
-                    processors: [:ffmpeg_wav_to_mp3],
+                    processors: [:converter],
                     :path => ':user_id/:style/:filename',
                     :storage => :s3,
                     :s3_credentials => Proc.new{|a| a.instance.s3_credentials },
